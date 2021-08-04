@@ -21,3 +21,6 @@
 import Route from "@ioc:Adonis/Core/Route";
 
 Route.post("/register", "UsersController.store");
+Route.post("/login", "SessionsController.store");
+
+Route.post("/reset-password", "ForgotPasswordsController.store");

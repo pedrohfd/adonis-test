@@ -15,6 +15,12 @@ export default class User extends BaseModel {
   @column({ serializeAs: null })
   public password: string;
 
+  @column()
+  public token?: string;
+
+  @column()
+  public token_created_at?: Date;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 
