@@ -20,7 +20,15 @@
 
 import Route from "@ioc:Adonis/Core/Route";
 
-Route.post("/register", "UsersController.store");
+Route.post("/register", "UsersController.create");
 Route.post("/login", "SessionsController.store");
+Route.put("/new-password", "UsersController.update");
+Route.delete("/delete-user", "UsersController.delete");
 
-Route.post("/reset-password", "ForgotPasswordsController.store");
+Route.post("/reset", "ForgotPasswordsController.store");
+Route.put("/reset", "ForgotPasswordsController.update");
+
+Route.get("/all-games", "GamesController.index");
+Route.post("/create-game", "GamesController.create");
+Route.put("/update-game/:gameId", "GamesController.update");
+Route.delete("/delete-game/:gameId", "GamesController.delete");

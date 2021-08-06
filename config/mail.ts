@@ -5,8 +5,8 @@
  * file.
  */
 
-import Env from '@ioc:Adonis/Core/Env'
-import { MailConfig } from '@ioc:Adonis/Addons/Mail'
+import Env from "@ioc:Adonis/Core/Env";
+import { MailConfig } from "@ioc:Adonis/Addons/Mail";
 
 const mailConfig: MailConfig = {
   /*
@@ -18,7 +18,7 @@ const mailConfig: MailConfig = {
   | a mailer
   |
   */
-  mailer: 'smtp',
+  mailer: "smtp",
 
   /*
   |--------------------------------------------------------------------------
@@ -43,17 +43,16 @@ const mailConfig: MailConfig = {
     |
     */
     smtp: {
-      driver: 'smtp',
-      host: Env.get('SMTP_HOST'),
-      port: Env.get('SMTP_PORT'),
-			auth: {
-				user: Env.get('SMTP_USERNAME'),
-				pass: Env.get('SMTP_PASSWORD'),
-				type: 'login',
-			}
+      driver: "smtp",
+      host: Env.get("MAIL_HOST"),
+      port: Env.get("MAIL_PORT"),
+      auth: {
+        user: Env.get("MAIL_USERNAME"),
+        pass: Env.get("MAIL_PASSWORD"),
+        type: "login",
+      },
     },
-
   },
-}
+};
 
-export default mailConfig
+export default mailConfig;
