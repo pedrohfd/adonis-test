@@ -24,30 +24,32 @@ export default class UsersController {
     return user;
   }
 
-  // public async update({ request, auth }: HttpContextContract) {
-  //   const { email, newPassword } = request.only(["email", "newPassword"]);
+  public async update({ request }: HttpContextContract) {
+    const { email, oldPassword, newPassword } = request.only([
+      "email",
+      "oldPassword",
+      "newPassword",
+    ]);
 
-  //   const { id } = await auth.use("api").authenticate();
+    await request.validate(NewPasswordValidator);
 
-  //   console.log(id);
+    const user = await User.findByOrFail("email", email);
 
-  //   // await request.validate(NewPasswordValidator);
+    if (oldPassword !== newPassword) {
+      user.password = newPassword;
 
-  //   // const user = await User.find("email", email);
+      console.log(user.password);
 
-  //   // console.log(user);
+      await user.save();
+    }
 
-  //   // user.password = newPassword;
+    return user;
+  }
 
-  //   // await user.save();
+  public async delete({ request }: HttpContextContract) {
+    const { email } = request.only(["email"]);
 
-  //   return user;
-  // }
-
-  public async delete({ auth }: HttpContextContract) {
-    const { id } = await auth.use("api").authenticate();
-
-    const user = await User.findByOrFail("id", id);
+    const user = await User.findByOrFail("email", email);
 
     await user.delete();
 

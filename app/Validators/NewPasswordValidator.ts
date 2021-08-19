@@ -24,15 +24,12 @@ export default class NewPasswordValidator {
    *    ```
    */
   public schema = schema.create({
-    // username: schema.string({}, [
-    //   rules.unique({ table: "users", column: "username" }),
-    // ]),
-    // oldPassword: schema.string({}, [
-    //   rules.exists({ table: "users", column: "password" }),
-    // ]),
-    newPassword: schema.string({}, [
-      rules.unique({ table: "users", column: "password" }),
+    email: schema.string({}, [
+      rules.email(),
+      rules.exists({ table: "users", column: "email" }),
     ]),
+    oldPassword: schema.string({ trim: true }, [rules.required()]),
+    newPassword: schema.string({ trim: true }, [rules.required()]),
   });
 
   /**

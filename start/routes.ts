@@ -22,13 +22,20 @@ import Route from "@ioc:Adonis/Core/Route";
 
 Route.post("/register", "UsersController.create");
 Route.post("/login", "SessionsController.store");
-Route.put("/new-password", "UsersController.update");
-Route.delete("/delete-user", "UsersController.delete");
 
 Route.post("/reset", "ForgotPasswordsController.store");
 Route.put("/reset", "ForgotPasswordsController.update");
 
-Route.get("/all-games", "GamesController.index");
-Route.post("/create-game", "GamesController.create");
-Route.put("/update-game/:gameId", "GamesController.update");
-Route.delete("/delete-game/:gameId", "GamesController.delete");
+Route.group(() => {
+  Route.put("/new-password", "UsersController.update");
+  Route.delete("/delete-user", "UsersController.delete");
+
+  Route.get("/all-games", "GamesController.index");
+  Route.post("/create-game", "GamesController.create");
+  Route.put("/update-game/:gameId", "GamesController.update");
+  Route.delete("/delete-game/:gameId", "GamesController.delete");
+
+  Route.post("/new-bet", "BetsController.create");
+  Route.get("/all-bets", "BetsController.index");
+  Route.delete("/delete-bet/:betId", "BetsController.delete");
+}).middleware("auth");
